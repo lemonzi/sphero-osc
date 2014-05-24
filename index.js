@@ -1,42 +1,39 @@
-var osc           = require('node-osc');
-var spheroFactory = require('node-sphero');
-var config        = require('./config');
+var osc    = require('node-osc');
+var sphero = require('spheron').sphero();
+var config = require('./config');
 
 var oscClient = new osc.Client('127.0.0.1', config['osc-send']);
 var oscServer = new osc.Server(config['osc-receive'], '0.0.0.0');
 
-var sphero = new spheroFactory.Sphero();
+sphero.on('open', function() {
+    console.log('Connected!');
 
-sphero.on('connected', function(ball) {
-    console.log('Done!');
+    // Start streaming sensors
+    var mask = 0x000007FE7;
+    var rate = 400 / config.rate;
+    sphero.setDataStreaming(rate, 1, mask, 0);
 
-    // Control Sphero from OSC
-    oscServer.on('message', function (msg, rinfo) {
-        // Parse message and send it to Sphero
-        ball.setRGBLED(0, 255, 0, false);
-    });
+});
 
-    // Set up the sensor callbacks
-    var frames = 10,
-        count  = 10;
-    var sensors = Object.keys(ball.sensors).map(function(s) {
-        return ball.sensors[s];
-    });
-    ball.setDataStreaming(
-        sensors,           // Which sensors to read
-        config.frameRate,  // Frame rate (def. 400)
-        frames,            // What is this??
-        count              // What is this??
-    );
+// Control Sphero from OSC
+oscServer.on('message', function (msg, rinfo) {
+    // Parse message and send it to Sphero
+    sphero.setRGBLED(0, 255, 0, false);
+});
 
-    ball.on('message', function(msg) {
-        // Parse data and send it via OSC
-        console.log(msg);
-        oscClient.send('/oscAddress', msg.DATA);
-    });
-
+sphero.on('packet', function(packet) {
+    // Parse data and send it via OSC
+    console.log(packet);
+    if (packet.ID_CODE === 0x03) {
+        console.log({
+            x: packet.DATA.readInt16BE(0),
+            y: packet.DATA.readInt16BE(2),
+            z: packet.DATA.readInt16BE(4),
+        });
+    }
+    oscClient.send('/oscAddress', packet.DATA);
 });
 
 // Run!
 console.log('Connecting to Sphero...');
-sphero.connect();
+sphero.open(config.serialPort);

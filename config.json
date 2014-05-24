@@ -1,6 +1,6 @@
 {
     "osc-send": 1042,
     "osc-receive": 1043,
-    "prefix": "",
-    "frameRate": 1
+    "frameRate": 1,
+    "serialPort": "/dev/cu.Sphero-RBG-RN-SPP"
 }

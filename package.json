@@ -21,6 +21,6 @@
   "homepage": "https://github.com/lemonzi/sphero-osc",
   "dependencies": {
     "node-osc": "^0.2.1",
-    "node-sphero": "0.0.6"
+    "spheron": "0.0.3"
   }
 }
