@@ -1,0 +1,26 @@
+{
+  "name": "sphero-osc",
+  "version": "0.0.0",
+  "description": "A bridge that makes the Sphero robotic ball speak OSC (Open Sound Control), for interfacing with Max/MSP or whatever.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lemonzi/sphero-osc"
+  },
+  "keywords": [
+    "sphero",
+    "osc",
+    "control",
+    "robotic"
+  ],
+  "author": "Quim Llimona",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lemonzi/sphero-osc/issues"
+  },
+  "homepage": "https://github.com/lemonzi/sphero-osc",
+  "dependencies": {
+    "node-osc": "^0.2.1",
+    "node-sphero": "0.0.6"
+  }
+}
