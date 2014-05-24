@@ -19,12 +19,13 @@ sphero.on('connected', function(ball) {
     ball.setDataStreaming(
         Object.keys(sphero.sensors),    // Which sensors to read
         config.frameRate,               // Frame rate (def. 400)
-        frames || 0,                    // What is this??
-        count || 0                      // What is this??
+        frames || 10,                   // What is this??
+        count || 10                     // What is this??
     );
 
     ball.on('message', function(msg) {
         // Parse data and send it via OSC
+        console.log(msg);
         oscClient.send('/oscAddress', msg.DATA);
     });
 
