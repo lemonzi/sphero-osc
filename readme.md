@@ -9,7 +9,7 @@ Usage
 - Make sure that you have NodeJS installed.
 - Clone the repo and `cd` to it.
 - Run `npm install` (only the first time) to fetch the dependencies.
-- Run `node indx`.
+- Run `node .`.
 - Enjoy!
 
 Configuration
