@@ -18,10 +18,10 @@ sphero.on('connected', function(ball) {
 
     // Set up the sensor callbacks
     ball.setDataStreaming(
-        Object.keys(sphero.sensors),    // Which sensors to read
-        config.frameRate,               // Frame rate (def. 400)
-        frames || 10,                   // What is this??
-        count || 10                     // What is this??
+        ball.sensors,      // Which sensors to read
+        config.frameRate,  // Frame rate (def. 400)
+        frames || 10,      // What is this??
+        count || 10        // What is this??
     );
 
     ball.on('message', function(msg) {
