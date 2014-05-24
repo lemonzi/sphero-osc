@@ -8,6 +8,7 @@ var oscServer = new osc.Server(config['osc-receive'], '0.0.0.0');
 var sphero = new spheroFactory.Sphero();
 
 sphero.on('connected', function(ball) {
+    console.log('Done!');
 
     // Control Sphero from OSC
     oscServer.on('message', function (msg, rinfo) {
@@ -32,4 +33,5 @@ sphero.on('connected', function(ball) {
 });
 
 // Run!
+console.log('Connecting to Sphero...');
 sphero.connect();
