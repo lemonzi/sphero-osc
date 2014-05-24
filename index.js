@@ -19,8 +19,11 @@ sphero.on('connected', function(ball) {
     // Set up the sensor callbacks
     var frames = 10,
         count  = 10;
+    var sensors = Object.keys(ball.sensors).map(function(s) {
+        return ball.sensors[s];
+    });
     ball.setDataStreaming(
-        ball.sensors,      // Which sensors to read
+        sensors,           // Which sensors to read
         config.frameRate,  // Frame rate (def. 400)
         frames,            // What is this??
         count              // What is this??
