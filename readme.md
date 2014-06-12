@@ -1,7 +1,7 @@
 sphero-osc
 ==========
 
-This is a NodeJS application that connects to one or more Sphero v2.0 balls via Bluetooth and sets up an OSC interface for recieving data from its sensors and sending control commands. 
+This is a NodeJS application that connects to a Sphero v2.0 ball via Bluetooth and sets up an OSC interface for recieving data from its sensors and sending control commands. 
 
 Usage
 -----
